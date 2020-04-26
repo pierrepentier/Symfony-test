@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formPersonne 'bootstrap_4_layout.html.twig' %}
+
+{% block title %} Ajouter une nouvelle personne {% endblock %}
+
+{% block body %}
+
+    <h1>Ajouter une nouvelle personne</h1>
+    {{ form_start(formPersonne) }}
+        {{ form_widget(formPersonne) }}
+    {{ form_end(formPersonne) }}
+
+{% endblock %}

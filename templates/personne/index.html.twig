@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste personnes{% endblock %}
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="row justify-content-end mx-auto"><p class="mr-3">Logged in as {{ app.user.username }}<p> <a class="btn btn-outline-secondary my-auto" href="{{ path('app_logout') }}">Logout</a></div>
+    {% endif %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <div class="row justify-content-center"><h1>LISTE DES PERSONNES</h1></div>
+    <a class ="btn btn-success align-left" href="{{ path('person_create') }}">Ajouter une personne</a>
+    <table class="table table-dark mt-3">
+    <tr>
+        <th>ID</th>
+        <th>PRENOM</th>
+        <th>NOM</th>
+        <th>SALAIRE</th>
+        <th>ADRESSE</th>
+        <th>DETAIL</th>
+        <th>MODIFER/SUPPRIMER</th>
+    </tr>
+    {% for person in persons %}
+        <tr>
+            <td>{{ person.id}}</td>
+            <td>{{ person.prenom}}</td>
+            <td>{{ person.nom}}</td>
+            <td>{{ person.salaire}}</td>
+            <td>{{ person.adresse.numeroRUE}}
+                {{ person.adresse.nomRUE}}<br>
+                {{ person.adresse.codePostal}}
+                {{ person.adresse.ville}}<br>
+                {{ person.adresse.pays}}
+            </td>
+            <td><a class="btn btn-primary" href="{{ path('person_detail',{'id' : person.id}) }}">Détail<a></td>
+            <td><a class="btn btn-warning" href="{{ path('person_edit',{'id' : person.id}) }}">Modifier<a>
+                <a class="btn btn-danger" href="{{ path('person_delete',{'id' : person.id}) }}">Supprimer<a></td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}
